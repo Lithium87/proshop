@@ -5,11 +5,11 @@ import Rating from '../components/Rating';
 import products from '../products';
 
 const ProductScreen = ({match}) => {
-  const product = products.find (p => p._id === match.params.id);
+  const product = products.find(p => p._id === match.params.id);
 
   return (
-    <React.Fragment>
-      <Link className="btn btn-light my-3" to="/">
+    <>
+      <Link className='btn btn-light my-3' to='/'>
         Go Back
       </Link>
       <Row>
@@ -17,15 +17,12 @@ const ProductScreen = ({match}) => {
           <Image src={product.image} alt={product.name} fluid />
         </Col>
         <Col md={3}>
-          <ListGroup variant="flush">
+          <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>{product.name}</h2>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Rating
-                value={product.rating}
-                text={`${product.numReviews} reviews`}
-              />
+              <Rating value={product.rating} text={`${product.numReviews} reviews`} />
             </ListGroup.Item>
             <ListGroup.Item>
               Price: ${product.price}
@@ -37,7 +34,7 @@ const ProductScreen = ({match}) => {
         </Col>
         <Col md={3}>
           <Card>
-            <ListGroup variant="flush">
+            <ListGroup variant='flush'>
               <ListGroup.Item>
                 <Row>
                   <Col>
@@ -61,11 +58,7 @@ const ProductScreen = ({match}) => {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <Button
-                  className="btn-block"
-                  type="button"
-                  disabled={product.countInStock === 0}
-                >
+                <Button className='btn-block' type='button'>
                   Add To Card
                 </Button>
               </ListGroup.Item>
@@ -73,7 +66,7 @@ const ProductScreen = ({match}) => {
           </Card>
         </Col>
       </Row>
-    </React.Fragment>
+    </>
   );
 };
 
