@@ -7,18 +7,15 @@ import Rating from '../components/Rating';
 const ProductScreen = ({match}) => {
   const [product, setProduct] = useState ({});
 
-  useEffect (
-    () => {
-      const fetchProduct = async () => {
-        const {data} = await axios.get (`/api/products/${match.params.id}`);
+  useEffect (() => {
+    const fetchProduct = async () => {
+      const {data} = await axios.get (`/api/products/${match.params.id}`);
 
-        setProduct (data);
-      };
+      setProduct (data);
+    };
 
-      fetchProduct ();
-    },
-    [match]
-  );
+    fetchProduct ();
+  }, []);
 
   return (
     <React.Fragment>
