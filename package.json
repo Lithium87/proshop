@@ -21,6 +21,7 @@
     },
     "homepage": "https://github.com/Lithium87/proshop#readme",
     "dependencies": {
+        "colors": "^1.4.0",
         "concurrently": "^6.2.1",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
