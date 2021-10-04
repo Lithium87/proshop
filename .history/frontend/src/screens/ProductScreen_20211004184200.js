@@ -1,13 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {Row, Col, Image, ListGroup, Card, Button, Form} from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  Card,
+  Button,
+  FormData,
+} from 'react-bootstrap';
 import Rating from '../components/Rating';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import {listProductDetails} from '../actions/productActions';
 
-const ProductScreen = ({history, match}) => {
+const ProductScreen = ({match}) => {
   const [qty, setQty] = useState (0);
 
   const dispatch = useDispatch ();
@@ -21,10 +29,6 @@ const ProductScreen = ({history, match}) => {
     },
     [dispatch, match]
   );
-
-  const addToCartHandler = () => {
-    history.push (`/cart/${match.params.id}?qty=${qty}`);
-  };
 
   return (
     <React.Fragment>
@@ -108,7 +112,6 @@ const ProductScreen = ({history, match}) => {
 
                       <ListGroup.Item>
                         <Button
-                          onClick={addToCartHandler}
                           className="btn-block"
                           type="button"
                           disabled={product.countInStock === 0}

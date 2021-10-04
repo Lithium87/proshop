@@ -7,7 +7,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import {listProductDetails} from '../actions/productActions';
 
-const ProductScreen = ({history, match}) => {
+const ProductScreen = ({match}) => {
   const [qty, setQty] = useState (0);
 
   const dispatch = useDispatch ();
@@ -21,10 +21,6 @@ const ProductScreen = ({history, match}) => {
     },
     [dispatch, match]
   );
-
-  const addToCartHandler = () => {
-    history.push (`/cart/${match.params.id}?qty=${qty}`);
-  };
 
   return (
     <React.Fragment>
@@ -108,7 +104,6 @@ const ProductScreen = ({history, match}) => {
 
                       <ListGroup.Item>
                         <Button
-                          onClick={addToCartHandler}
                           className="btn-block"
                           type="button"
                           disabled={product.countInStock === 0}
