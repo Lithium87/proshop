@@ -91,8 +91,8 @@ const ProductScreen = ({history, match}) => {
                             <Col>
                               <Form.Control
                                 as="select"
-                                value={qty}
-                                onChange={e => setQty (Number (e.target.value))}
+                                value={product.qty}
+                                onChange={e => setQty (e.target.value)}
                               >
                                 {[
                                   ...Array (product.countInStock).keys (),
