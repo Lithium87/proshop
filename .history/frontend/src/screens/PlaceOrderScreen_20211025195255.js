@@ -28,21 +28,18 @@ const PlaceOrderScreen = ({history}) => {
         if(success) {
             history.push(`/order/${order._id}`);
         }
-        // eslint-disable-next-line
     }, [history, success]);
 
     const placeOrderHandler = () => {
-        dispatch(
-            createOrder({
-              orderItems: cart.cartItems,
-              shippingAddress: cart.shippingAddress,
-              paymentMethod: cart.paymentMethod,
-              itemsPrice: cart.itemsPrice,
-              shippingPrice: cart.shippingPrice,
-              taxPrice: cart.taxPrice,
-              totalPrice: cart.totalPrice,
-            })
-          )
+        dispatch(createOrder({
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice
+        }))
     }
 
     return (
