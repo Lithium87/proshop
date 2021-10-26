@@ -26,7 +26,7 @@ export const createOrder = order => async (dispatch, getState) => {
     const {data} = await axios.post ('/api/orders', order, config);
 
     dispatch ({
-      type: ORDER_DETAILS_SUCCESS,
+      type: ORDER_CREATE_SUCCESS,
       payload: data,
     });
   } catch (error) {
