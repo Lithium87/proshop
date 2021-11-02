@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Row, Col, Button, Form, Table} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap';
+import {LinkContainer} from 'react-router-dom';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import {getUserDetails, updateUserProfile} from '../actions/userActions';
@@ -150,9 +150,7 @@ const ProfileScreen = ({history, location}) => {
                         </td>
                         <td>
                           <LinkContainer to={`/order/${order._id}`}>
-                            <Button className="btn-sm" variant="light">
-                              Details
-                            </Button>
+                            <Button variant="light">Details</Button>
                           </LinkContainer>
                         </td>
                       </tr>
