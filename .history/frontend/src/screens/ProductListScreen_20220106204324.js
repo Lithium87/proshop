@@ -49,7 +49,7 @@ const ProductListScreen = ({history, match}) => {
         </Col>
         <Col className="text-right">
           <Button className="my-3" onClick={createProductHandler}>
-            <i className="fas fa-plus" /> Create Product
+            <i className="fas-fa-plus" /> Create Product
           </Button>
         </Col>
       </Row>
@@ -84,7 +84,7 @@ const ProductListScreen = ({history, match}) => {
                           to={`/admin/product/${product._id}/edit`}
                         >
                           <Button variant="light" className="btn-sm">
-                            <i className="fas fa-edit" />
+                            <i className="fa fas-edit" />
                           </Button>
                         </LinkContainer>
                         <Button
