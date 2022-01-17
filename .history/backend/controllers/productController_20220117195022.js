@@ -43,7 +43,7 @@ const createProduct = asyncHandler (async (req, res) => {
   });
 
   const createdProduct = await product.save ();
-  res.status (201).json (createdProduct);
+  res.status (201).json (product);
 });
 
 const updateProduct = asyncHandler (async (req, res) => {
@@ -57,29 +57,8 @@ const updateProduct = asyncHandler (async (req, res) => {
     countInStock,
   } = req.body;
 
-  const product = await Product.findById (req.params.id);
-
-  if (product) {
-    product.name = name;
-    product.price = price;
-    product.description = description;
-    product.category = category;
-    product.brand = brand;
-    product.countInStock = countInStock;
-    product.image = image;
-
-    const updatedProduct = await product.save ();
-    res.status (201).json (updatedProduct);
-  } else {
-    res.status (404);
-    throw new Error ('Product not found');
-  }
+  const createdProduct = await product.save ();
+  res.status (201).json (product);
 });
 
-export {
-  getProducts,
-  getProductById,
-  deleteProduct,
-  createProduct,
-  updateProduct,
-};
+export {getProducts, getProductById, deleteProduct, createProduct};

@@ -69,7 +69,7 @@ const updateProduct = asyncHandler (async (req, res) => {
     product.image = image;
 
     const updatedProduct = await product.save ();
-    res.status (201).json (updatedProduct);
+    res.status (201).json (updateProduct);
   } else {
     res.status (404);
     throw new Error ('Product not found');
