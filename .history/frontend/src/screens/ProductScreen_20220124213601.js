@@ -5,15 +5,24 @@ import {Row, Col, Image, ListGroup, Card, Button, Form} from 'react-bootstrap';
 import Rating from '../components/Rating';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import {listProductDetails} from '../actions/productActions';
+import {listProductDetails, createProductReview} from '../actions/productActions';
+import {PRODUCT_CREATE_REVIEW_RESET} from '../constants/productConstants';
 
-const ProductScreen = ({match}) => {
-  const [qty, setQty] = useState (0);
+const ProductScreen = ({history, match}) => {
+  const [qty, setQty] = useState (1);
+  const [rating, setRating] = useState (0);
+  const [comment, setComment] = useState ('');
 
   const dispatch = useDispatch ();
 
   const productDetails = useSelector (state => state.productDetails);
   const {loading, error, product} = productDetails;
+
+  const userLogin = useSelector (state => state.userLogin);
+  const {userInfo} = userLogin;
+
+  const productReviewCreate = useSelector (state => state.productReviewCreate);
+  const {success: successProductReview, error: errorProductReview} = productReviewCreate;
 
   useEffect (
     () => {
@@ -21,6 +30,10 @@ const ProductScreen = ({match}) => {
     },
     [dispatch, match]
   );
+
+  const addToCartHandler = () => {
+    history.push (`/cart/${match.params.id}?qty=${qty}`);
+  };
 
   return (
     <React.Fragment>
@@ -30,8 +43,10 @@ const ProductScreen = ({match}) => {
       {loading
         ? <Loader />
         : error
-            ? <Message variant="danger">{error}</Message>
-            : <Row>
+            ? (<Message variant="danger">{error}</Message>)
+            : (
+              <>
+              <Row>
                 <Col md={6}>
                   <Image src={product.image} alt={product.name} fluid />
                 </Col>
@@ -88,7 +103,7 @@ const ProductScreen = ({match}) => {
                               <Form.Control
                                 as="select"
                                 value={qty}
-                                onChange={e => setQty (e.target.value)}
+                                onChange={e => setQty (Number (e.target.value))}
                               >
                                 {[
                                   ...Array (product.countInStock).keys (),
@@ -104,6 +119,7 @@ const ProductScreen = ({match}) => {
 
                       <ListGroup.Item>
                         <Button
+                          onClick={addToCartHandler}
                           className="btn-block"
                           type="button"
                           disabled={product.countInStock === 0}
@@ -114,7 +130,31 @@ const ProductScreen = ({match}) => {
                     </ListGroup>
                   </Card>
                 </Col>
-              </Row>}
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <h2>Reviews</h2>
+                  {product.reviews.length === 0 && <Message>No reviews</Message>}
+                  <ListGroup variant='flush'>
+                    {product.reviews.map(review => (
+                      <ListGroup.Item key={review._id}>
+                        <strong>{review.name}</strong>
+                        <Rating value={review.rating} />
+                        <p>{review.createdAt.substring(0, 10)}</p>
+                        <p>{review.comment}</p>
+                      </ListGroup.Item>
+                    ))}
+                    <ListGroup.Item>
+                      <h2>Write a Customer Review</h2>
+                      {userInfo ? 
+                        (<h1></h1>) : 
+                        <Message>Please <Link to='/login'>sign in</Link> to write a review</Message>}
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Col>
+              </Row>
+              </>
+            )}
     </React.Fragment>
   );
 };
